@@ -1,3 +1,4 @@
+//It has a ton of bugs...
 public class ConnectFour {
   
    public static char[][] displayBoard(char[][] board) {         //displays board
