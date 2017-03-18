@@ -110,7 +110,27 @@ public class ConnectFour {
    */
   
   public char[][] computerTurn(char[][] board) { // What the main method will call
+    if(turnNum == 1){
+      return compSet(board, 4); // Experts say that the best first move is the center
+    } 
+    else{
+      int column = moveRank(board);
+    }
+  }
+  
+  public char[][] moveRank(char[][] board){ // We're gonna use this to decide what move to make
     
+  }
+  
+  public char[][] compSet(char[][] board, int c) { // The computer sets a.... chocolate piece??
+    for(int k = numRows-1; k>=0; k--){
+      if(board[k][c] == ' '){
+        board[k][c] = 'C';
+        return board;
+      }
+    }
+    System.out.println("That column is full already!");
+    return board;
   }
   
   public String computerComment() { // Uses compLines to randomly generate something for the computer to say
