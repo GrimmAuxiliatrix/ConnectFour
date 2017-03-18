@@ -6,13 +6,14 @@ public class ConnectFourTest{
      ConnectFour connect = new ConnectFour(1); // I changed it to connect because connectFour was too long
      Scanner tu = new Scanner(System.in);
      char[][] board = new char[connect.getRows()][connect.getCols()];
-     connect.displayBoard(connect.makeBoard(board));
+     board = connect.makeBoard(board);
      
      boolean gameIsOver = false;
      
      while(!gameIsOver){
        board = connect.computerTurn(board);
        connect.displayBoard(board);
+       connect.computerComment();
        System.out.println("Enter the column where you want to make your move.");
        int column = tu.nextInt()-1;
        board = connect.setPiece(board, column);       
