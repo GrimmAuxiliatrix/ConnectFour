@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class ConnectFourTest{
   
   public static void main(String[] args){
-     ConnectFour connect = new ConnectFour(); // I changed it to connect because connectFour was too long
+     ConnectFour connect = new ConnectFour(1); // I changed it to connect because connectFour was too long
      Scanner tu = new Scanner(System.in);
      char[][] board = new char[connect.getRows()][connect.getCols()];
      connect.displayBoard(connect.makeBoard(board));
@@ -17,26 +17,9 @@ public class ConnectFourTest{
        board = connect.setPiece(board, column);       
        connect.displayBoard(board);
        connect.winner(board);
+       
+       connect.nextTurn();
      }
-  }
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+  }  
   
 }
