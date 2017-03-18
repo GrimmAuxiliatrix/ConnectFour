@@ -16,7 +16,9 @@ public class ConnectFourTest{
        int column = tu.nextInt()-1;
        board = connect.setPiece(board, column);       
        connect.displayBoard(board);
-       connect.winner(board);
+       if(connect.winner(board)){
+         gameIsOver = true;
+       }
        
        connect.nextTurn();
      }
