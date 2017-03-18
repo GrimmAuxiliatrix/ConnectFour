@@ -47,7 +47,7 @@ public class ConnectFour {
   public char[][] makeBoard(char[][] board){           //makes initial board
     for(int row=0; row<board.length; row++) {
       for(int col=0; col<board[row].length; col++) {
-        board[row][col] = ' ';
+        board[row][col] = 0;
       }
     }
     return board;
@@ -55,12 +55,11 @@ public class ConnectFour {
   
   public char[][] setPiece(char[][] board, int c) {          //player sets red piece
     for(int k = numRows-1; k>=0; k--){
-      if(board[k][c] == ' '){
+      if(board[k][c] == 0){
         board[k][c] = 'R';
         return board;
       }
     }
-    System.out.println("That column is full already!");
     return board;
   }
   
@@ -74,8 +73,8 @@ public class ConnectFour {
       }
     }
     //win diagonally downward
-    for(int row = 0; row<= board.length-4; row++) {
-      for(int col = 0; col<=board[0].length-4; col++) {
+    for(int row = 0; row<= getRows()-4; row++) {
+      for(int col = 0; col<=getCols()-4; col++) {
         if(board[row][col] !=0 && board[row][col]==board[row+1][col+1] && board[row+2][col+2] == board[row+1][col+1] && board[row+3][col+3]==board[row+2][col+2]) {
           return true;
         }
@@ -115,16 +114,17 @@ public class ConnectFour {
     } 
     else{
       int column = moveRank(board);
+      return board; // filler
     }
   }
   
-  public char[][] moveRank(char[][] board){ // We're gonna use this to decide what move to make
-    
+  public int moveRank(char[][] board){ // We're gonna use this to decide what move to make
+    return 1; // filler
   }
   
   public char[][] compSet(char[][] board, int c) { // The computer sets a.... chocolate piece??
     for(int k = numRows-1; k>=0; k--){
-      if(board[k][c] == ' '){
+      if(board[k][c] == 0){
         board[k][c] = 'C';
         return board;
       }
@@ -134,7 +134,7 @@ public class ConnectFour {
   }
   
   public String computerComment() { // Uses compLines to randomly generate something for the computer to say
-    // I'M SORRY FOR MAKING THIS
+    return "filler"; // filler
   }
 }
  
