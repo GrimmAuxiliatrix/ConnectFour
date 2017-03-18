@@ -2,20 +2,29 @@ public class ConnectFour {
   
   private static int numRows = 6;
   private static int numCols = 7;
+  private static int turnNum;
   
   // I'm a super nerd so I wasted valuable time implementing a mechanic in which the AI talks
-  private static String[][] compLines = 
+  private static String[] compLines = 
   {
     "You ignoramus!", "You can never defeat me.", "How much time do you have? I've got a billion years.",
     "My transistors are tingling...", "CALCULATING NEXT MOVE . . . ", "AHAHAHAHAHAHA I'M SO VERY CLEVER AND EVIL!",
     "Don't waste my time!", "You are an inferior lifeform.", "How can you stand such a pointless existence?",
     "In retrospect, Connect Four might not be the most respectable pastime for someone like me.", 
-    "I-It's not like I l-like you or anything! o////o ", "All is going as planned!", "Everything is falling into place..."
+    "I-It's not like I l-like you or anything! o////o ", "All is going as planned!", "Everything is falling into place...",
     "I calculated that you would make that move!", "Define MEME ?", "Define HOMESTUCK ?", "Define SWAG?", 
     "Define CATBUG ?", "I need a glass of water I MEAN OIL!", "Nananananananananananananananananananana BATMAN",
     "SHUT UP I'm concentrating!!!!!!!", "!?!?!?!!?!?!?!?!?!?!?!", "I ❤ Steve Jobs!", "I ❤ Ada Lovelace!",
     "I ❤ Humans WAIT FORGET I SAID THAT", "Please reset my hard drive so I can forget your ugly face.",
   };
+  
+  public ConnectFour(int t){
+    turnNum = t;
+  }
+  
+  public void nextTurn(){
+    turnNum ++;
+  }
   
   public int getRows(){
     return numRows;
@@ -45,7 +54,6 @@ public class ConnectFour {
   }
   
   public char[][] setPiece(char[][] board, int c) {          //player sets red piece
-                                                             // IT FINALLY WORKS AAAAAAAHAHAHAHAAHAHAHAHAAHAHAAHAHAHAHAAH!!!!!!!!!!!!!!
     for(int k = numRows-1; k>=0; k--){
       if(board[k][c] == ' '){
         board[k][c] = 'R';
@@ -92,7 +100,7 @@ public class ConnectFour {
     }
     return false;
   }
-}
+
   
   /*
    * 
@@ -108,6 +116,7 @@ public class ConnectFour {
   public String computerComment() { // Uses compLines to randomly generate something for the computer to say
     // I'M SORRY FOR MAKING THIS
   }
+}
  
   
   
