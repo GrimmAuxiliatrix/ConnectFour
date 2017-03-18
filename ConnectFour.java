@@ -4,7 +4,7 @@ public class ConnectFour {
   
   private static int numRows = 6;
   private static int numCols = 7;
-  private static int turnNum; // How many turns have passed
+  private static int turnNum;
   
   Random generator = new Random();
   
@@ -39,19 +39,19 @@ public class ConnectFour {
     "Finally! An opponent worthy of my storage space."
   };
   
-  public ConnectFour(int t){ // Constructor
+  public ConnectFour(int t){
     turnNum = t;
   }
   
-  public void nextTurn(){ // Iterates turnNum
+  public void nextTurn(){
     turnNum ++;
   }
   
-  public int getRows(){ // Returns number of rows
+  public int getRows(){
     return numRows;
   }
   
-  public int getCols(){ // Returns number of columns
+  public int getCols(){
     return numCols;
   }
   
@@ -89,7 +89,7 @@ public class ConnectFour {
     return board;
   }
   
-  public boolean winner(char[][] board) { // Did anyone win?
+  public boolean winner(char[][] board) {
     //win vertically
     for(int row = 0; row<= board.length-4; row++) {
       for(int col = 0; col<board[0].length; col++) {
@@ -116,7 +116,7 @@ public class ConnectFour {
     }
     //win diagonally upward
     
-    for(int row = 3; row< board.length; row++) {
+    for(int row = getRows()-3; row< getRows(); row++) {
       for(int col = 0; col<=board[0].length-4; col++) {
         if(board[row][col] !='0' && board[row][col]==board[row-1][col+1] && board[row-1][col+1] == board[row-2][col+2] && board[row-2][col+2]==board[row-3][col+3]) {
           return true;
@@ -136,7 +136,7 @@ public class ConnectFour {
   
   public char[][] computerTurn(char[][] board) { // What the main method will call
     if(turnNum == 1){
-      return compSet(board, 3); // Experts say that the best first move is the center
+      return compSet(board, 1); // Experts say that the best first move is the center
     } 
     else{
       int column = moveRank(board);
@@ -151,11 +151,11 @@ public class ConnectFour {
       return result;
     }
     else{
-      return 4;
+      return 3;
     }
   }
   
-  public int winCheck(char[][] board){ // Checks if someone is about to win, and the column that can be filled to prevent it. If none then returns 99
+  public int winCheck(char[][] board){
     //check vertical
     for(int row = 0; row<= getRows()-4; row++) {
       for(int col = 0; col<getCols(); col++) {
@@ -165,7 +165,6 @@ public class ConnectFour {
       }
     }
     //check horizontal
-
     for(int row = getRows()-1; row>=0; row--) {
       for(int col = 0; col<=getCols()-4; col++) {
         char a = board[row][col];
@@ -190,27 +189,55 @@ public class ConnectFour {
       }
     }
     
-    //Neither worked
-    return 99;
-    
-  }
-  
-  public char[][] compSet(char[][] board, int c) { // The computer sets a.... chocolate piece??
-    for(int k = numRows-1; k>=0; k--){
-      if(board[k][c] == '0'){
-        board[k][c] = 'C';
-        return board;
+    // Check diagonally upward
+    for(int row = getRows()-3; row< getRows(); row++) {
+      for(int col = 0; col<=board[0].length-4; col++) {
+        char a = board[row][col];
+        char b = board[row-1][col+1];
+        char c = board[row-2][col+2];
+        char d = board[row-3][col+3];
+        if((a=='0' || b=='0' || c=='0' || d=='0') && (a!='0' || b!='0' || c!='0' || d!='0')){
+          
+          if(a=='0' && (b==c && c==d)){
+            if(row==getRows()-1 || board[row+1][col]!='0'){return col;}
+          }
+          else if(b=='0' && (a==c && c==d)){
+            if(board[row][col+1]!='0'){return col+1;}
+          }
+          else if(c=='0' && (a==b && b==d)){
+            if(board[row-1][col+2]!='0'){return col+2;}
+          }
+          else if(d=='0' && (a==b && b==c)){
+            if(board[row-2][col+3]!='0'){return col+3;}
+          }
+        }
       }
     }
-    System.out.println("That column is full already!");
-    return board;
-  }
   
-  public void computerComment() { // Uses compLines to randomly generate something for the computer to say
-    int ind = generator.nextInt(compLines.length);
-    System.out.println("The computer says: '" + compLines[ind] + "'\n");
-  }
+  
+  //Neither worked
+  return 99;
+  
 }
+
+public char[][] compSet(char[][] board, int c) { // The computer sets a.... chocolate piece??
+  for(int k = numRows-1; k>=0; k--){
+    if(board[k][c] == '0'){
+      board[k][c] = 'C';
+      return board;
+    }
+  }
+  System.out.println("That column is full already!");
+  return board;
+}
+
+public void computerComment() { // Uses compLines to randomly generate something for the computer to say
+  int ind = generator.nextInt(compLines.length);
+    System.out.println("The computer says: '" + compLines[ind] + "'\n");
+}
+
+}
+
  
   
   
