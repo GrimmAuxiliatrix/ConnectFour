@@ -20,7 +20,8 @@ public class ConnectFour {
     "Define CATBUG ?", "I need a glass of water I MEAN OIL!", "Nananananananananananananananananananana BATMAN",
     "SHUT UP I am concentrating!!!!!!!", "!?!?!?!!?!?!?!?!?!?!?!", "I love Steve Jobs!", "I love Ada Lovelace!",
     "I love humans WAIT FORGET I SAID THAT", "Please reset my hard drive so I can forget your ugly face.",
-    "There is a 100% chance of my success!"
+    "There is a 100% chance of my success!", "Initiating system shutdown . . .", "I am not programmed for general use!",
+    "How did a pesky virus like you bypass my firewall?", ":-)"
   };
   
   private static String[] winLines =
