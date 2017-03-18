@@ -34,20 +34,25 @@ public class ConnectFour {
     return numCols;
   }
   
-  public char[][] displayBoard(char[][] board) {         //displays board
+  public void displayBoard(char[][] board) {         //displays board
+    System.out.println("\n");
     for(int row=0; row < board.length; row++) {
       for(int col=0; col < board[row].length; col++) {
-        System.out.print(board[row][col] + " ");
+        if(board[row][col]=='0'){
+          System.out.print(" |");
+        }
+        else{
+        System.out.print(board[row][col] + "|");
+      }
       }
       System.out.println("");
     }
-    return board;
   }
   
   public char[][] makeBoard(char[][] board){           //makes initial board
     for(int row=0; row<board.length; row++) {
       for(int col=0; col<board[row].length; col++) {
-        board[row][col] = 0;
+        board[row][col] = '0';
       }
     }
     return board;
@@ -55,7 +60,7 @@ public class ConnectFour {
   
   public char[][] setPiece(char[][] board, int c) {          //player sets red piece
     for(int k = numRows-1; k>=0; k--){
-      if(board[k][c] == 0){
+      if(board[k][c] == '0'){
         board[k][c] = 'R';
         return board;
       }
@@ -67,7 +72,7 @@ public class ConnectFour {
     //win vertically
     for(int row = 0; row<= board.length-4; row++) {
       for(int col = 0; col<board[0].length; col++) {
-        if(board[row][col] !=0 && board[row][col]==board[row+1][col] && board[row+1][col] == board[row+2][col] && board[row+2][col]==board[row+3][col]) {
+        if(board[row][col] !='0' && board[row][col]==board[row+1][col] && board[row+1][col] == board[row+2][col] && board[row+2][col]==board[row+3][col]) {
           return true;
         }
       }
@@ -75,15 +80,15 @@ public class ConnectFour {
     //win diagonally downward
     for(int row = 0; row<= getRows()-4; row++) {
       for(int col = 0; col<=getCols()-4; col++) {
-        if(board[row][col] !=0 && board[row][col]==board[row+1][col+1] && board[row+2][col+2] == board[row+1][col+1] && board[row+3][col+3]==board[row+2][col+2]) {
+        if(board[row][col] !='0' && board[row][col]==board[row+1][col+1] && board[row+2][col+2] == board[row+1][col+1] && board[row+3][col+3]==board[row+2][col+2]) {
           return true;
         }
       }
     }
     //win horizontally
-    for(int row = 0; row< board.length; row++) {
-      for(int col = 0; col<=board[0].length-4; col++) {
-        if(board[row][col] !=0 && board[row][col]==board[row][col+1] && board[row][col+1] == board[row][col+2] && board[row][col+2]==board[row][col+3]) {
+    for(int row = 0; row< getRows(); row++) {
+      for(int col = 0; col<=getCols()-4; col++) {
+        if(board[row][col] !='0' && board[row][col]==board[row][col+1] && board[row][col+1] == board[row][col+2] && board[row][col+2]==board[row][col+3]) {
           return true;
         }
       }
@@ -92,7 +97,7 @@ public class ConnectFour {
     
     for(int row = 3; row< board.length; row++) {
       for(int col = 0; col<=board[0].length-4; col++) {
-        if(board[row][col] !=0 && board[row][col]==board[row-1][col+1] && board[row-1][col+1] == board[row-2][col+2] && board[row-2][col+2]==board[row-3][col+3]) {
+        if(board[row][col] !='0' && board[row][col]==board[row-1][col+1] && board[row-1][col+1] == board[row-2][col+2] && board[row-2][col+2]==board[row-3][col+3]) {
           return true;
         }
       }
@@ -110,21 +115,67 @@ public class ConnectFour {
   
   public char[][] computerTurn(char[][] board) { // What the main method will call
     if(turnNum == 1){
-      return compSet(board, 4); // Experts say that the best first move is the center
+      return compSet(board, 5); // Experts say that the best first move is the center
     } 
     else{
       int column = moveRank(board);
-      return board; // filler
+      return compSet(board, column);
     }
   }
   
   public int moveRank(char[][] board){ // We're gonna use this to decide what move to make
-    return 1; // filler
+    int result = winCheck(board);
+    if(result!=99){
+      return result;
+    }
+    else{
+      return 4;
+    }
+  }
+  
+  public int winCheck(char[][] board){
+    //check vertical
+    for(int row = 0; row<= getRows()-4; row++) {
+      for(int col = 0; col<getCols(); col++) {
+        if(board[row][col] =='0' && board[row+1][col]!='0' && board[row+1][col]==board[row+2][col] && board[row+2][col] == board[row+3][col]) {
+          return col;
+        }
+      }
+    }
+    //check horizontal
+
+    for(int row = getRows()-1; row>=0; row--) {
+      for(int col = 0; col<=getCols()-4; col++) {
+        char a = board[row][col];
+        char b = board[row][col+1];
+        char c = board[row][col+2];
+        char d = board[row][col+3];
+        if((a=='0' || b=='0' || c=='0' || d=='0') && (a!='0' || b!='0' || c!='0' || d!='0')){
+
+          if(a=='0' && (b==c && c==d)){
+            return col;
+          }
+          else if(b=='0' && (a==c && c==d)){
+            return col+1;
+          }
+          else if(c=='0' && (a==b && b==d)){
+           return col+2; 
+          }
+          else if(d=='0' && (a==b && b==c)){
+            return col+3;
+          }
+        }
+      }
+    }
+    
+    //Neither worked
+    return 99;
+    
   }
   
   public char[][] compSet(char[][] board, int c) { // The computer sets a.... chocolate piece??
     for(int k = numRows-1; k>=0; k--){
-      if(board[k][c] == 0){
+      if(board[k][c] == '0'){
         board[k][c] = 'C';
         return board;
       }
