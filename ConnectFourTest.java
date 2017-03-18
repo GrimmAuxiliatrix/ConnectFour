@@ -11,12 +11,18 @@ public class ConnectFourTest{
      boolean gameIsOver = false;
      
      while(!gameIsOver){
+       
+       // The computer's turn
        board = connect.computerTurn(board);
        connect.displayBoard(board);
        connect.computerComment();
+       
+       // The player's turn
        System.out.println("Enter the column where you want to make your move.");
        int column = tu.nextInt()-1;
-       board = connect.setPiece(board, column);       
+       board = connect.setPiece(board, column);    
+       
+       // Housekeeping
        connect.displayBoard(board);
        if(connect.winner(board)){
          gameIsOver = true;
