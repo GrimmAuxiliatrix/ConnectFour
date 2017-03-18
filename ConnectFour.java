@@ -45,6 +45,7 @@ public class ConnectFour {
   }
   
   public char[][] setPiece(char[][] board, int c) {          //player sets red piece
+                                                             // IT FINALLY WORKS AAAAAAAHAHAHAHAAHAHAHAHAAHAHAAHAHAHAHAAH!!!!!!!!!!!!!!
     for(int k = numRows-1; k>=0; k--){
       if(board[k][c] == ' '){
         board[k][c] = 'R';
