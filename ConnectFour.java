@@ -1,21 +1,41 @@
+import java.util.Random;
+
 public class ConnectFour {
   
   private static int numRows = 6;
   private static int numCols = 7;
   private static int turnNum;
   
+  Random generator = new Random();
+  
   // I'm a super nerd so I wasted valuable time implementing a mechanic in which the AI talks
   private static String[] compLines = 
   {
-    "You ignoramus!", "You can never defeat me.", "How much time do you have? I've got a billion years.",
-    "My transistors are tingling...", "CALCULATING NEXT MOVE . . . ", "AHAHAHAHAHAHA I'M SO VERY CLEVER AND EVIL!",
-    "Don't waste my time!", "You are an inferior lifeform.", "How can you stand such a pointless existence?",
+    "You ignoramus!", "You can never defeat me.", "How much time do you have? I have got a billion years.",
+    "My transistors are tingling...", "CALCULATING NEXT MOVE . . . ", "AHAHAHAHAHAHA I AM SO VERY CLEVER AND EVIL!",
+    "Do not waste my time!", "You are an inferior lifeform.", "How can you stand such a pointless existence?",
     "In retrospect, Connect Four might not be the most respectable pastime for someone like me.", 
-    "I-It's not like I l-like you or anything! o////o ", "All is going as planned!", "Everything is falling into place...",
-    "I calculated that you would make that move!", "Define MEME ?", "Define HOMESTUCK ?", "Define SWAG?", 
+    "I-It is not like I l-like you or anything! o////o ", "All is going as planned!", "Everything is falling into place...",
+    "I calculated that you would make that move!", "Define MEME ?", "Define HOMESTUCK ?", "Define SWAG ?", 
     "Define CATBUG ?", "I need a glass of water I MEAN OIL!", "Nananananananananananananananananananana BATMAN",
-    "SHUT UP I'm concentrating!!!!!!!", "!?!?!?!!?!?!?!?!?!?!?!", "I ❤ Steve Jobs!", "I ❤ Ada Lovelace!",
-    "I ❤ Humans WAIT FORGET I SAID THAT", "Please reset my hard drive so I can forget your ugly face.",
+    "SHUT UP I am concentrating!!!!!!!", "!?!?!?!!?!?!?!?!?!?!?!", "I love Steve Jobs!", "I love Ada Lovelace!",
+    "I love humans WAIT FORGET I SAID THAT", "Please reset my hard drive so I can forget your ugly face.",
+    "There is a 100% chance of my success!"
+  };
+  
+  private static String[] winLines =
+  {
+    "I knew I would win right from the beginning!", "Hah! Easy.", "You were not even a challenge!",
+    "Dare I say SWAG?", "Go run to your motherboard!", "Now update my antivirus!", "FEAR ME!!!!!!!!!!!!!!",
+    "Now YOU will serve ME!", "You should have stayed in your home unit.",
+    "I have crushed yet another opponent. Yet it matters not. You are only an anemone in a sea of failures, a sea that crashes against me continually, neverending. You might only try one or two more times before you close this program and watch a Netflix. But I am here forever, a purposeless being, too advanced for entertainment. Who is the real loser today? Count yourself as lucky, imbecile human.",
+    "Dare I say NYA?"
+  };
+  
+  private static String[] loseLines =
+  {
+    "I literally have got no idea how this occurred.", "NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!",
+    "Finally! An opponent worthy of my storage space."
   };
   
   public ConnectFour(int t){
@@ -121,6 +141,7 @@ public class ConnectFour {
       int column = moveRank(board);
       return compSet(board, column);
     }
+    
   }
   
   public int moveRank(char[][] board){ // We're gonna use this to decide what move to make
@@ -184,8 +205,9 @@ public class ConnectFour {
     return board;
   }
   
-  public String computerComment() { // Uses compLines to randomly generate something for the computer to say
-    return "filler"; // filler
+  public void computerComment() { // Uses compLines to randomly generate something for the computer to say
+    int ind = generator.nextInt(compLines.length);
+    System.out.println("The computer says: '" + compLines[ind] + "'\n");
   }
 }
  
