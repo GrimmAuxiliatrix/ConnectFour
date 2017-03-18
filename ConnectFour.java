@@ -4,7 +4,7 @@ public class ConnectFour {
   
   private static int numRows = 6;
   private static int numCols = 7;
-  private static int turnNum;
+  private static int turnNum; // How many turns have passed
   
   Random generator = new Random();
   
@@ -38,19 +38,19 @@ public class ConnectFour {
     "Finally! An opponent worthy of my storage space."
   };
   
-  public ConnectFour(int t){
+  public ConnectFour(int t){ // Constructor
     turnNum = t;
   }
   
-  public void nextTurn(){
+  public void nextTurn(){ // Iterates turnNum
     turnNum ++;
   }
   
-  public int getRows(){
+  public int getRows(){ // Returns number of rows
     return numRows;
   }
   
-  public int getCols(){
+  public int getCols(){ // Returns number of columns
     return numCols;
   }
   
@@ -88,7 +88,7 @@ public class ConnectFour {
     return board;
   }
   
-  public boolean winner(char[][] board) {
+  public boolean winner(char[][] board) { // Did anyone win?
     //win vertically
     for(int row = 0; row<= board.length-4; row++) {
       for(int col = 0; col<board[0].length; col++) {
@@ -135,7 +135,7 @@ public class ConnectFour {
   
   public char[][] computerTurn(char[][] board) { // What the main method will call
     if(turnNum == 1){
-      return compSet(board, 5); // Experts say that the best first move is the center
+      return compSet(board, 3); // Experts say that the best first move is the center
     } 
     else{
       int column = moveRank(board);
@@ -154,7 +154,7 @@ public class ConnectFour {
     }
   }
   
-  public int winCheck(char[][] board){
+  public int winCheck(char[][] board){ // Checks if someone is about to win, and the column that can be filled to prevent it. If none then returns 99
     //check vertical
     for(int row = 0; row<= getRows()-4; row++) {
       for(int col = 0; col<getCols(); col++) {
